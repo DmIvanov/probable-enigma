@@ -12,8 +12,8 @@
 		283DAD081F29015800EE5E7B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 283DAD061F29015800EE5E7B /* Main.storyboard */; };
 		283DAD0A1F29015800EE5E7B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 283DAD091F29015800EE5E7B /* Assets.xcassets */; };
 		283DAD0D1F29015800EE5E7B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 283DAD0B1F29015800EE5E7B /* LaunchScreen.storyboard */; };
-		283DAD181F29015800EE5E7B /* probable_enigmaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283DAD171F29015800EE5E7B /* probable_enigmaTests.swift */; };
 		283DAD241F29134300EE5E7B /* AlertWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283DAD231F29134300EE5E7B /* AlertWrapper.swift */; };
+		283DAD291F2921E500EE5E7B /* AlertTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283DAD281F2921E500EE5E7B /* AlertTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,9 +35,10 @@
 		283DAD0C1F29015800EE5E7B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		283DAD0E1F29015800EE5E7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		283DAD131F29015800EE5E7B /* probable-enigmaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "probable-enigmaTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		283DAD171F29015800EE5E7B /* probable_enigmaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = probable_enigmaTests.swift; sourceTree = "<group>"; };
 		283DAD191F29015800EE5E7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		283DAD231F29134300EE5E7B /* AlertWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertWrapper.swift; sourceTree = "<group>"; };
+		283DAD281F2921E500EE5E7B /* AlertTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertTest.swift; sourceTree = "<group>"; };
+		283DAD2A1F29240000EE5E7B /* probable-enigmaTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "probable-enigmaTests-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,11 +82,11 @@
 			children = (
 				283DAD021F29015800EE5E7B /* AppDelegate.swift */,
 				283DAD041F29015800EE5E7B /* ViewController.swift */,
+				283DAD231F29134300EE5E7B /* AlertWrapper.swift */,
 				283DAD061F29015800EE5E7B /* Main.storyboard */,
 				283DAD091F29015800EE5E7B /* Assets.xcassets */,
 				283DAD0B1F29015800EE5E7B /* LaunchScreen.storyboard */,
 				283DAD0E1F29015800EE5E7B /* Info.plist */,
-				283DAD231F29134300EE5E7B /* AlertWrapper.swift */,
 			);
 			path = "probable-enigma";
 			sourceTree = "<group>";
@@ -93,8 +94,9 @@
 		283DAD161F29015800EE5E7B /* probable-enigmaTests */ = {
 			isa = PBXGroup;
 			children = (
-				283DAD171F29015800EE5E7B /* probable_enigmaTests.swift */,
 				283DAD191F29015800EE5E7B /* Info.plist */,
+				283DAD281F2921E500EE5E7B /* AlertTest.swift */,
+				283DAD2A1F29240000EE5E7B /* probable-enigmaTests-Bridging-Header.h */,
 			);
 			path = "probable-enigmaTests";
 			sourceTree = "<group>";
@@ -153,6 +155,7 @@
 					};
 					283DAD121F29015800EE5E7B = {
 						CreatedOnToolsVersion = 8.2;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 283DACFE1F29015800EE5E7B;
 					};
@@ -212,7 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				283DAD181F29015800EE5E7B /* probable_enigmaTests.swift in Sources */,
+				283DAD291F2921E500EE5E7B /* AlertTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,10 +371,13 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "probable-enigmaTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "DI.probable-enigmaTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "probable-enigmaTests/probable-enigmaTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/probable-enigma.app/probable-enigma";
 			};
@@ -382,10 +388,12 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "probable-enigmaTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "DI.probable-enigmaTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "probable-enigmaTests/probable-enigmaTests-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/probable-enigma.app/probable-enigma";
 			};
