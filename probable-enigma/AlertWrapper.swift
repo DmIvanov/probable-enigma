@@ -11,35 +11,28 @@ import UIKit
 
 class AlertWrapper {
 
-    var testingMode = false
-    var title = ""
-    var message = ""
-    var actions = [UIAlertAction]()
+    // MARK: - Properties
 
-    init(testingMode: Bool = false) {
-        self.testingMode = testingMode
+    private let alert: UIAlertController
+
+
+    // MARK: - Lyfecycle
+
+    init(alert: UIAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)) {
+        self.alert = alert
     }
 
-    func showAlert(fromVC: UIViewController, title: String, message: String, actions: [UIAlertAction], completion: @escaping ()->()) {
-        self.title = title
-        self.message = message
-        self.actions = actions
 
-        if !testingMode {
-            showUIAlert(fromVC: fromVC, completion: completion)
-        }
+    // MARK: - Public
+
+    func showAlert(from: UIViewController, title: String, message: String, actions: [UIAlertAction], completion: (() -> Void)? = nil)
+    {
+        alert.title = title
+        alert.message = message
+        actions.forEach { alert.addAction($0) }
+
+        from.present(alert, animated: true, completion: completion)
     }
 
-    private func showUIAlert(fromVC: UIViewController, completion: @escaping ()->()) {
-        let alertVC = UIAlertController(
-            title: title,
-            message: message,
-            preferredStyle: .alert
-        )
-        for action in actions {
-            alertVC.addAction(action)
-        }
-        fromVC.present(alertVC, animated: true, completion: completion)
-    }
 }
 

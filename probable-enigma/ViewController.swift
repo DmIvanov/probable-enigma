@@ -12,7 +12,12 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.showAlertView()
+        }
+    }
 
+    func showAlertView() {
         let okAction = UIAlertAction(
             title: "Yeah.. OK",
             style: .default) { (action) in
@@ -23,17 +28,14 @@ class ViewController: UIViewController {
             style: .default) { (action) in
                 print("Cancel action chosen")
         }
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            AlertWrapper().showAlert(
-                fromVC: self,
-                title: "Great title for the alert",
-                message: "The message is even better!",
-                actions: [okAction, cancelAction],
-                completion: { 
-                    print("Alert presenting is finished.")
-            })
-        }
+        AlertWrapper().showAlert(
+            from: self,
+            title: "Great title for the alert",
+            message: "The message is even better!",
+            actions: [okAction, cancelAction],
+            completion: {
+                print("Alert presenting is finished.")
+        })
     }
 }
 

@@ -9,39 +9,44 @@
 import XCTest
 @testable import probable_enigma
 
+
+class ViewControllerMock: UIViewController {
+
+    var alertToPresent: UIViewController?
+
+    override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
+        alertToPresent = viewControllerToPresent
+    }
+}
+
+
 class AlertTest: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        
     }
 
     func testAlertBeingShown() {
-        let okAction = UIAlertAction(
-            title: "Yeah.. OK",
-            style: .default) { (action) in
-                print("Ok action chosen")
-        }
-        let cancelAction = UIAlertAction(
-            title: "I think.. NO",
-            style: .default) { (action) in
-                print("Cancel action chosen")
-        }
-        let alertTitle = "TestTitle"
-        let alertMessage = "TestMessage"
+        let testTitle = "Title"
+        let testMessage = "Message"
 
-        let wrapper = AlertWrapper(testingMode: true)
-        wrapper.showAlert(
-            fromVC: UIViewController(),
-            title: alertTitle,
-            message: alertMessage,
-            actions: [okAction, cancelAction]) { 
+        let mockController = ViewControllerMock()
+        let mockAlert = UIAlertController()
+        let alertWrapper = AlertWrapper(alert: mockAlert)
+        let firstAction = UIAlertAction()
+        let secondAction = UIAlertAction()
 
-        }
+        alertWrapper.showAlert(
+            from: mockController,
+            title: testTitle,
+            message: testMessage,
+            actions: [firstAction, secondAction]
+        )
 
-        XCTAssertEqual(wrapper.title, alertTitle)
-        XCTAssertEqual(wrapper.message, alertMessage)
-        XCTAssertEqual(wrapper.actions[0], okAction)
-        XCTAssertEqual(wrapper.actions[1], cancelAction)
+        XCTAssertEqual(mockAlert.title, testTitle)
+        XCTAssertEqual(mockAlert.message, testMessage)
+        XCTAssertEqual(mockAlert.actions[0], firstAction)
+        XCTAssertEqual(mockAlert.actions[1], secondAction)
+        XCTAssertEqual(mockController.alertToPresent, mockAlert)
     }
 }
