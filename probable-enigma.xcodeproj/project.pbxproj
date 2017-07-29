@@ -14,6 +14,8 @@
 		283DAD0D1F29015800EE5E7B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 283DAD0B1F29015800EE5E7B /* LaunchScreen.storyboard */; };
 		283DAD241F29134300EE5E7B /* AlertWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283DAD231F29134300EE5E7B /* AlertWrapper.swift */; };
 		283DAD291F2921E500EE5E7B /* AlertTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283DAD281F2921E500EE5E7B /* AlertTest.swift */; };
+		28F11DDF1F2B0D9F007CA5D6 /* Obfuscator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F11DDE1F2B0D9F007CA5D6 /* Obfuscator.swift */; };
+		28F11DE11F2CE4E2007CA5D6 /* ObfuscatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F11DE01F2CE4E2007CA5D6 /* ObfuscatorTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +41,8 @@
 		283DAD231F29134300EE5E7B /* AlertWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertWrapper.swift; sourceTree = "<group>"; };
 		283DAD281F2921E500EE5E7B /* AlertTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertTest.swift; sourceTree = "<group>"; };
 		283DAD2A1F29240000EE5E7B /* probable-enigmaTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "probable-enigmaTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		28F11DDE1F2B0D9F007CA5D6 /* Obfuscator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Obfuscator.swift; sourceTree = "<group>"; };
+		28F11DE01F2CE4E2007CA5D6 /* ObfuscatorTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObfuscatorTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +91,7 @@
 				283DAD091F29015800EE5E7B /* Assets.xcassets */,
 				283DAD0B1F29015800EE5E7B /* LaunchScreen.storyboard */,
 				283DAD0E1F29015800EE5E7B /* Info.plist */,
+				28F11DDE1F2B0D9F007CA5D6 /* Obfuscator.swift */,
 			);
 			path = "probable-enigma";
 			sourceTree = "<group>";
@@ -94,8 +99,9 @@
 		283DAD161F29015800EE5E7B /* probable-enigmaTests */ = {
 			isa = PBXGroup;
 			children = (
-				283DAD191F29015800EE5E7B /* Info.plist */,
 				283DAD281F2921E500EE5E7B /* AlertTest.swift */,
+				28F11DE01F2CE4E2007CA5D6 /* ObfuscatorTest.swift */,
+				283DAD191F29015800EE5E7B /* Info.plist */,
 				283DAD2A1F29240000EE5E7B /* probable-enigmaTests-Bridging-Header.h */,
 			);
 			path = "probable-enigmaTests";
@@ -208,6 +214,7 @@
 				283DAD241F29134300EE5E7B /* AlertWrapper.swift in Sources */,
 				283DAD051F29015800EE5E7B /* ViewController.swift in Sources */,
 				283DAD031F29015800EE5E7B /* AppDelegate.swift in Sources */,
+				28F11DDF1F2B0D9F007CA5D6 /* Obfuscator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,6 +223,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				283DAD291F2921E500EE5E7B /* AlertTest.swift in Sources */,
+				28F11DE11F2CE4E2007CA5D6 /* ObfuscatorTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
