@@ -87,11 +87,11 @@
 				283DAD021F29015800EE5E7B /* AppDelegate.swift */,
 				283DAD041F29015800EE5E7B /* ViewController.swift */,
 				283DAD231F29134300EE5E7B /* AlertWrapper.swift */,
+				28F11DDE1F2B0D9F007CA5D6 /* Obfuscator.swift */,
 				283DAD061F29015800EE5E7B /* Main.storyboard */,
 				283DAD091F29015800EE5E7B /* Assets.xcassets */,
 				283DAD0B1F29015800EE5E7B /* LaunchScreen.storyboard */,
 				283DAD0E1F29015800EE5E7B /* Info.plist */,
-				28F11DDE1F2B0D9F007CA5D6 /* Obfuscator.swift */,
 			);
 			path = "probable-enigma";
 			sourceTree = "<group>";

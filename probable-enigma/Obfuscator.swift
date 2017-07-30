@@ -74,30 +74,80 @@ enum ObfuscationType {
 }
 
 
-class Obfuscator: NSObject {
+class Obfuscator {
 
-    fileprivate let keyBytes: [UInt8]?
-    fileprivate let obfuscatedBytes: [UInt8]
+    // MARK: - Properties
+    fileprivate let keyBytesPointer: UnsafeMutableBufferPointer<UInt8>?
+    fileprivate let obfuscatedBytesPointer: UnsafeMutableBufferPointer<UInt8>
+
     fileprivate let type: ObfuscationType
 
+    // MARK: - Lyfecycle
     init(key: String? = nil, plainString: String, type: ObfuscationType = .Base64_XOR) {
+        let keyBytes = [UInt8](key!.utf8)
         if key != nil {
-            self.keyBytes = [UInt8](key!.utf8)
+            self.keyBytesPointer = Obfuscator.createUnsafeArray(array: keyBytes)
         } else {
-            self.keyBytes = nil
+            self.keyBytesPointer = nil
         }
         self.type = type
-        self.obfuscatedBytes = type.encode(key: keyBytes, plainString: plainString)!
+        let obfuscatedBytes = type.encode(key: keyBytes, plainString: plainString)!
+        self.obfuscatedBytesPointer = Obfuscator.createUnsafeArray(array: obfuscatedBytes)
     }
 
     init(obfuscator: Obfuscator) {
-        self.keyBytes = obfuscator.keyBytes
-        self.obfuscatedBytes = obfuscator.obfuscatedBytes
         self.type = obfuscator.type
+        let obfuscatedBytes = Array<UInt8>(obfuscator.obfuscatedBytesPointer)
+        self.obfuscatedBytesPointer = Obfuscator.createUnsafeArray(array: obfuscatedBytes)
+        if obfuscator.keyBytesPointer != nil {
+            let keyBytes = Array<UInt8>(obfuscator.keyBytesPointer!)
+            self.keyBytesPointer = Obfuscator.createUnsafeArray(array: keyBytes)
+        } else {
+            self.keyBytesPointer = nil
+        }
     }
 
+    deinit {
+        // cleaning the memory
+        obfuscatedBytesPointer.baseAddress?.deinitialize(count: obfuscatedBytesPointer.count)
+        obfuscatedBytesPointer.baseAddress?.deallocate(capacity: obfuscatedBytesPointer.count)
+        if keyBytesPointer != nil {
+            keyBytesPointer!.baseAddress?.deinitialize(count: keyBytesPointer!.count)
+            keyBytesPointer!.baseAddress?.deallocate(capacity: keyBytesPointer!.count)
+        }
+    }
+
+
+    // MARK: - Public
     func plainString() -> String {
+        let obfuscatedBytes = Array<UInt8>(obfuscatedBytesPointer)
+        let keyBytes = (keyBytesPointer != nil) ? Array<UInt8>(keyBytesPointer!) : nil
         return type.decode(obfuscated: obfuscatedBytes, key: keyBytes)!
+    }
+
+    /*
+    func stringPointer() -> UnsafeMutablePointer<String> {
+        let string = plainString()
+        let ptr = UnsafeMutablePointer<String>.allocate(capacity: 1)
+        ptr.initialize(to: string)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            ptr.deinitialize()
+            ptr.deallocate(capacity: 1)
+        }
+        return ptr
+    }
+     */
+
+
+    // MARK: - Private
+    private static func createUnsafeArray(array: [UInt8]) -> UnsafeMutableBufferPointer<UInt8> {
+        let count = array.count
+        let pointer = UnsafeMutablePointer<UInt8>.allocate(capacity: count)
+        pointer.initialize(to: 0, count: count)
+        for i in 0..<count {
+            pointer.advanced(by: i).pointee = array[i]
+        }
+        return UnsafeMutableBufferPointer(start: pointer, count: count)
     }
 }
 
